@@ -1,0 +1,6 @@
+{
+    "account_number": 54321,
+    "balance": 500,
+    "owner_name": "Alice",
+    "currency": "EUR"
+}
