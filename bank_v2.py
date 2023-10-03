@@ -99,11 +99,13 @@ class BankAccount:
     def check_account_number(account_number):
         return len(str(account_number)) == 5
 
+
+
 if __name__ == "__main__":
     BankAccount.create_exchange_rate()
 
-    account1 = BankAccount(12345, 1000, "John", "USD")
-    account2 = BankAccount(54321, 500, "Alice", "EUR")
+    account1 = NewBankAccount(12345, 1000, "John", "USD", 500, 5)
+    account2 = NewBankAccount(54321, 500, "Alice", "EUR", 300, 3)
 
     print(account1)
     print(account2)
@@ -128,6 +130,9 @@ if __name__ == "__main__":
     matching_accounts = BankAccount.find_accounts_by_owner("John")
     for account in matching_accounts:
         print(account.account_info())
+
+    account1.add_interest(15)
+    account2.add_interest(10)
 
     account1.transfer_funds(account2, 500)
     print(account1.account_info())
