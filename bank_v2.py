@@ -104,8 +104,8 @@ class BankAccount:
 if __name__ == "__main__":
     BankAccount.create_exchange_rate()
 
-    account1 = NewBankAccount(12345, 1000, "John", "USD", 500, 5)
-    account2 = NewBankAccount(54321, 500, "Alice", "EUR", 300, 3)
+    account1 = BankAccount(12345, 1000, "John", "USD", 500, 5)
+    account2 = BankAccount(54321, 500, "Alice", "EUR", 300, 3)
 
     print(account1)
     print(account2)
@@ -137,4 +137,7 @@ if __name__ == "__main__":
     account1.transfer_funds(account2, 500)
     print(account1.account_info())
     print(account2.account_info())
+
+
+
 

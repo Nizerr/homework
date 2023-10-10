@@ -89,51 +89,51 @@ if __name__ == "__main__":
     v3 = Vector(1, 2, 3)
 
     print(v1)
-    print(v1 == v2)  # False
-    print(v1 == v3)  # True
+    print(v1 == v2)
+    print(v1 == v3)
 
     v4 = v1 + v2
-    print(v4)  # Vector(5, 7, 9)
+    print(v4)
 
     v5 = v2 - v1
-    print(v5)  # Vector(3, 3, 3)
+    print(v5)
 
     v1 += v2
-    print(v1)  # Vector(5, 7, 9)
+    print(v1)
 
     v2 -= v3
-    print(v2)  # Vector(3, 3, 3)
+    print(v2)
 
     scalar_product = v1 * v2
-    print(scalar_product)  # 96
+    print(scalar_product)
 
     scaled_vector = v1 * 2
-    print(scaled_vector)  # Vector(10, 14, 18)
+    print(scaled_vector)
 
     length = len(v1)
-    print(length)  # 13
+    print(length)
 
     integer_length = int(v1)
-    print(integer_length)  # 13
+    print(integer_length)
 
     neg_vector = -v1
-    print(neg_vector)  # Vector(-5, -7, -9)
+    print(neg_vector)
 
-    print(v1[0])  # 5
-    print(v1[1])  # 7
-    print(v1[2])  # 9
+    print(v1[0])
+    print(v1[1])
+    print(v1[2])
 
     v1[0] = 10
     v1[1] = 20
     v1[2] = 30
-    print(v1)  # Vector(10, 20, 30)
+    print(v1)
 
-    print(10 in v1)  # True
-    print(25 in v1)  # False
+    print(10 in v1)
+    print(25 in v1)
 
-    print(bool(v1))  # True
-    print(bool(Vector(0, 0, 0)))  # False
+    print(bool(v1))
+    print(bool(Vector(0, 0, 0)))
 
     v6 = v1()
-    print(v6)  # Vector(20, 40, 60)
+    print(v6)
 

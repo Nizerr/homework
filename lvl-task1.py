@@ -1,3 +1,4 @@
+from sys import getsizeof
 #task 1
 # class Count:
 #     def __init__(self, start, end):
@@ -31,20 +32,68 @@
 
 # task 2
 
-class Ten:
-    def __get__(self, instance, owner):
-        print(f"{instance} - {owner}")
-        return 10
+# class Ten:
+#     def __get__(self, instance, owner):
+#         print(f"{instance} - {owner}")
+#         return 10
+#
+#     def __set__(self, instance, value):
+#         print(f"{self} - {instance} - {value}")
+#         instance._test = value
+# class A:
+#     x = 5
+#     y = Ten()
+#
+#
+# a = A()
+# print(a.x)
+# a.y = 20
+# print(a.__dict__)
 
-    def __set__(self, instance, value):
-        print(f"{self} - {instance} - {value}")
-        instance._test = value
-class A:
-    x = 5
-    y = Ten()
+#task 3
+# class NameDescriptor:
+#
+#     def _init_(self, prefix="_", length=5):
+#         self.prefix = prefix
+#         self.length = length
+#
+#     def __get__(self, instance, owner):
+#         return getattr (instance, self.var)
+#
+#     def _set__(self, instance, value):
+#         if len(value) >= 5:
+#             setattr(instance, self.var, value)
+#         else:
+#             raise ValueError
+#     def __set_nane__(self, owner, name):
+#         var_name = self.prefix + name
+#         self.var = var_name
+#
+# class Users:
+#     username = NameDescriptor ("__")
+#     name = NameDescriptor()
+#     Last_name = NameDescriptor()
+#
+#     def __init__ (self, username, name, last_name):
+#         self.username = username
+#         self.name = name
+#         self.last_name = last_name
+#
+#
+# U = Users("admin","Jon", "Smit")
+# print (U.__dict__)
+# # {' _username": "admin', "_name": "Jon'}
+
+class User:
+
+    __slots__ = ("username", "name", "last_name")
+    def __init__(self, username, name, last_name):
+        self.username = username
+        self.name = name
+        self.last_name = last_name
 
 
-a = A()
-print(a.x)
-a.y = 20
-print(a.__dict__)
+U = User("admin", "Jon", "Smitt")
+print(U.username, U.name, U.last_name)
+size_u = getsizeof(U)
+print(size_u)
