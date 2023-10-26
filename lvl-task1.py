@@ -278,63 +278,124 @@ from sys import getsizeof
 # stack.iter()
 
 
-class Node:
+# class Node:
+#
+#     def __init__(self, data=None):
+#         self.data = data
+#         self.next = None
+#
+#     def __repr__(self):
+#         return f"Node({self.data})"
+#
+# class Queues:
+#     def __init__(self):
+#         self._head = None
+#         self._tail = None
+#         self._size = 0
+#
+#     def enqueue(self, data):
+#         node = Node(data)
+#         if self._size == 0:
+#             self._head = self._tail = node
+#         else:
+#             self._tail.next = node
+#             self._tail = node
+#         self._size += 1
+#
+#     def dequeue(self):
+#         if self._size == 0:
+#             raise IndexError
+#         node = self._head
+#         self._head = node.next
+#         self._size -= 1
+#         if self._size == 0:
+#             self._tail = None
+#
+#         return node.data
+#
+#
+#     @property
+#     def size(self):
+#         return self._size
+#
+#     def iter(self):
+#         current = self._head
+#         while current:
+#             if current.next is None:
+#                 print(current, end='')
+#                 break
+#             print(current, "<-", end=" ")
+#             current = current.next
+#
+#
+# test1 = Queues()
+# test1.enqueue(2)
+# test1.enqueue(4)
+# test1.enqueue(1)
+# test1.enqueue(7)
+# test1.iter()
+# print()
+# test1.dequeue()
+# test1.iter()
+# print()
 
-    def __init__(self, data=None):
-        self.data = data
-        self.next = None
+
+class Node:
+    def __init__(self, value, prev=None):
+        self.value = value
+        self.left = None
+        self.right = None
+
 
     def __repr__(self):
-        return f"Node({self.data})"
+        return str(self.value)
 
-class Queues:
-    def __init__(self):
-        self._head = None
-        self._tail = None
-        self._size = 0
+class Tree:
+    def __init__(self, root: Node):
+        self.root = root
 
-    def enqueue(self, data):
-        node = Node(data)
-        if self._size == 0:
-            self._head = self._tail = node
-        else:
-            self._tail.next = node
-            self._tail = node
-        self._size += 1
+    def preorder(self,start, trace):
+        if start:
+            trace = trace + str(start.value) + "--"
+            trace = self.preorder(start.left, trace)
+            trace = self.preorder(start.right, trace)
+        return trace
 
-    def dequeue(self):
-        if self._size == 0:
-            raise IndexError
-        node = self._head
-        self._head = node.next
-        self._size -= 1
-        if self._size == 0:
-            self._tail = None
+    def postorder(self,start, trace):
+        if start:
+            trace = self.postorder(start.left, trace)
+            trace = self.postorder(start.right, trace)
+            trace = trace + str(start.value) + "--"
+        return trace
 
-        return node.data
+    # def add_node(self, parent_value, new_node, new_node_value, type="left"):
+    #     parent_node = self.find_parent_by_value(node=self.root, parent_value)
 
-
-    @property
-    def size(self):
-        return self._size
-
-    def iter(self):
-        current = self._head
-        while current:
-            if current.next is None:
-                print(current, end='')
-                break
-            print(current, "<-", end=" ")
-            current = current.next
+    def find_node_by_value(self, node, value):
+        if node is None:
+            return None
+        if node.value == value:
+            return node
+        left_result = self.find_node_by_value(node.left, value)
+        if left_result:
+            return left_result
+        return self.find_node_by_value(node.right, value)
 
 
-test1 = Queues()
-test1.enqueue(2)
-test1.enqueue(4)
-test1.enqueue(1)
-test1.enqueue(7)
-test1.iter()
-print()
-test1.dequeue()
-test1.iter()
-print()
+
+
+root = Node(1)
+tree = Tree(root)
+
+tree.root.left = Node(2)
+tree.root.right = Node(3)
+tree.root.left.left = Node(4)
+tree.root.left.right = Node(5)
+tree.root.right.right = Node(6)
+print(tree.preorder(tree.root, trace=""))
+
+search_node = tree.find_node_by_value(tree.root, 6)
+if search_node:
+    print(search_node.value)
+
+

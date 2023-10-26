@@ -36,15 +36,12 @@ class BankAccount:
                 matching_accounts.append(account)
         return matching_accounts
 
-    @classmethod
-    def get_average_balance(cls):
-        total_balance = sum(account.balance.amount for account in cls.accounts)
-        return total_balance / len(cls.accounts)
-
-    def __init__(self, account_number, balance, owner_name, currency):
+    def __init__(self, account_number, balance, owner_name, currency, daily_limit, interest_rate):
         self.account_number = account_number
         self.balance = Money(balance, currency)
         self.owner_name = owner_name
+        self.daily_limit = daily_limit
+        self.interest_rate = interest_rate
         BankAccount.accounts.append(self)
         self.save_to_file()
 
@@ -56,19 +53,19 @@ class BankAccount:
             self.balance.amount += amount
 
     def withdraw(self, amount):
-        if amount > 0 and amount <= self.balance.amount:
+        if 0 < amount <= self.balance.amount and amount <= self.daily_limit:
             self.balance.amount -= amount
 
     def account_info(self):
         return f"Номер акаунта: {self.account_number}, Баланс: {self.balance}, Власник: {self.owner_name}"
 
     def transfer(self, recipient, amount):
-        if amount > 0 and amount <= self.balance.amount:
+        if 0 < amount <= self.balance.amount and amount <= self.daily_limit:
             self.balance.amount -= amount
             recipient.deposit(amount)
 
     def transfer_funds(self, target_account, amount):
-        if amount > 0 and amount <= self.balance.amount:
+        if 0 < amount <= self.balance.amount and amount <= self.daily_limit:
             source_currency = self.balance.currency
             target_currency = target_account.balance.currency
             if source_currency == target_currency:
@@ -86,57 +83,7 @@ class BankAccount:
     def save_to_file(self):
         filename = f'data/{self.account_number}.json'
         os.makedirs('data', exist_ok=True)
-        with open(filename, "w") as file:
-            data = {
-                "account_number": self.account_number,
-                "balance": self.balance.amount,
-                "owner_name": self.owner_name,
-                "currency": self.balance.currency
-            }
-            json.dump(data, file, indent=4)
 
-    @staticmethod
-    def check_account_number(account_number):
-        return len(str(account_number)) == 5
-
-
-
-if __name__ == "__main__":
-    BankAccount.create_exchange_rate()
-
-    account1 = BankAccount(12345, 1000, "John", "USD", 500, 5)
-    account2 = BankAccount(54321, 500, "Alice", "EUR", 300, 3)
-
-    print(account1)
-    print(account2)
-
-    account1.deposit(200)
-    account2.withdraw(100)
-
-    print(account1.account_info())
-    print(account2.account_info())
-
-    account1.transfer(account2, 300)
-
-    print(account1.account_info())
-    print(account2.account_info())
-
-    print(BankAccount.check_account_number(12345))
-    print(BankAccount.check_account_number(1234))
-
-    print(account1.get_average_balance())
-    print(account2.get_average_balance())
-
-    matching_accounts = BankAccount.find_accounts_by_owner("John")
-    for account in matching_accounts:
-        print(account.account_info())
-
-    account1.add_interest(15)
-    account2.add_interest(10)
-
-    account1.transfer_funds(account2, 500)
-    print(account1.account_info())
-    print(account2.account_info())
 
 
 
