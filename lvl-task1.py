@@ -340,62 +340,64 @@ from sys import getsizeof
 # print()
 
 
-class Node:
-    def __init__(self, value, prev=None):
-        self.value = value
-        self.left = None
-        self.right = None
+# class Node:
+#     def __init__(self, value, prev=None):
+#         self.value = value
+#         self.left = None
+#         self.right = None
+#
+#
+#     def __repr__(self):
+#         return str(self.value)
+#
+# class Tree:
+#     def __init__(self, root: Node):
+#         self.root = root
+#
+#     def preorder(self,start, trace):
+#         if start:
+#             trace = trace + str(start.value) + "--"
+#             trace = self.preorder(start.left, trace)
+#             trace = self.preorder(start.right, trace)
+#         return trace
+#
+#     def postorder(self,start, trace):
+#         if start:
+#             trace = self.postorder(start.left, trace)
+#             trace = self.postorder(start.right, trace)
+#             trace = trace + str(start.value) + "--"
+#         return trace
+#
+#     # def add_node(self, parent_value, new_node, new_node_value, type="left"):
+#     #     parent_node = self.find_parent_by_value(node=self.root, parent_value)
+#
+#     def find_node_by_value(self, node, value):
+#         if node is None:
+#             return None
+#         if node.value == value:
+#             return node
+#         left_result = self.find_node_by_value(node.left, value)
+#         if left_result:
+#             return left_result
+#         return self.find_node_by_value(node.right, value)
+#
+#
+#
+#
+# root = Node(1)
+# tree = Tree(root)
+#
+# tree.root.left = Node(2)
+# tree.root.right = Node(3)
+# tree.root.left.left = Node(4)
+# tree.root.left.right = Node(5)
+# tree.root.right.right = Node(6)
+# print(tree.preorder(tree.root, trace=""))
+#
+# search_node = tree.find_node_by_value(tree.root, 6)
+# if search_node:
+#     print(search_node.value)
 
 
-    def __repr__(self):
-        return str(self.value)
-
-class Tree:
-    def __init__(self, root: Node):
-        self.root = root
-
-    def preorder(self,start, trace):
-        if start:
-            trace = trace + str(start.value) + "--"
-            trace = self.preorder(start.left, trace)
-            trace = self.preorder(start.right, trace)
-        return trace
-
-    def postorder(self,start, trace):
-        if start:
-            trace = self.postorder(start.left, trace)
-            trace = self.postorder(start.right, trace)
-            trace = trace + str(start.value) + "--"
-        return trace
-
-    # def add_node(self, parent_value, new_node, new_node_value, type="left"):
-    #     parent_node = self.find_parent_by_value(node=self.root, parent_value)
-
-    def find_node_by_value(self, node, value):
-        if node is None:
-            return None
-        if node.value == value:
-            return node
-        left_result = self.find_node_by_value(node.left, value)
-        if left_result:
-            return left_result
-        return self.find_node_by_value(node.right, value)
-
-
-
-
-root = Node(1)
-tree = Tree(root)
-
-tree.root.left = Node(2)
-tree.root.right = Node(3)
-tree.root.left.left = Node(4)
-tree.root.left.right = Node(5)
-tree.root.right.right = Node(6)
-print(tree.preorder(tree.root, trace=""))
-
-search_node = tree.find_node_by_value(tree.root, 6)
-if search_node:
-    print(search_node.value)
 
 
