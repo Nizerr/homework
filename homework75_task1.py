@@ -25,5 +25,5 @@ notification_service = NotificationService()
 notification_service.add_notification_method(email_service)
 notification_service.add_notification_method(sms_service)
 
-notification_service.send_notification("Привіи", "rostyslav@gmail.com")
+notification_service.send_notification("Привіт", "rostyslav@gmail.com")
 notification_service.send_notification("Зробіть замовлення на нашому стайті", "+380837751")
